@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+      body {
+        background: #eee;
+        max-width: 960px;
+        margin: 20px auto;
+      }
+      .box {
+        padding: 100px 0;
+        width: 400px;
+        text-align: center;
+        background: #ddd;
+        margin: 20px;
+        display: inline-block;
+      }
+      li {
+        list-style-type: none;
+        background: #fff;
+        margin: 20px auto;
+        padding: 10x 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      li.fav {
+        background: #ff9ed2;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello, Vue : )</h1>
+    <div id="app">
+      <!-- attribute binding -->
+      <!-- <a v-bind:href="url">best website ever</a> -->
+      <a :href="url">best website ever</a>
+
+      <div v-if="showDetails">
+        <p>{{title}} - {{author}} - {{age}}</p>
+        <ul>
+          <li
+            v-for="detail in filteredDetails"
+            :class="{fav:detail.isFav}"
+            @click="handleFav(detail)"
+          >
+            <img :src="detail.img" :alt="detail.title" />
+            <h3>{{detail.title}}</h3>
+            <p>{{detail.author}}</p>
+          </li>
+        </ul>
+      </div>
+
+      <button v-on:click="age++">Increase age</button>
+      <button v-on:click="age--">Decrease age</button>
+      <div @click="changeTitle('titleformfunction')">Change book title</div>
+      <button @click="toggleShowDetails">
+        <span v-if="showDetails">Hide details</span>
+        <span v-if="!showDetails">Show details</span>
+        <!-- <span v-else>Show Books</span> -->
+      </button>
+      <!-- <button @click="toggleHideDetails">hide details</button> -->
+      <div v-show="showDetails">Currently showing Books</div>
+
+      <br />
+      <!-- mouse events -->
+      <div class="box" @mouseover="handleEvent($event,5)">
+        mouseover (enter)
+      </div>
+      <div class="box" @mouseleave="handleEvent">mouseleave</div>
+      <div class="box" @dblclick="handleEvent">double click</div>
+      <div class="box" @mouseover="handleMousemove">position = {{x}} {{y}}</div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
+<!-- <script src="https://unpkg.com/vue@3"></script>
+
+<div id="app">{{ message }}</div>
+
+<script>  
+  const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        message: 'Hello Vue!'
+      }
+    }
+  }).mount('#app')
+</script> -->
